@@ -1,0 +1,13 @@
+{
+  "name": "@onequote/shared",
+  "version": "1.0.0",
+  "main": "./data/index.ts",
+  "types": "./data/index.ts",
+  "exports": {
+    ".": {
+      "import": "./data/index.ts",
+      "require": "./data/index.ts"
+    },
+    "./assets/*": "./assets/*"
+  }
+}

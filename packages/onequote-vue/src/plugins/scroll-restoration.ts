@@ -1,17 +1,21 @@
 import type { Router, RouterScrollBehavior } from 'vue-router'
 
-const SCROLL_KEY_PREFIX = 'onequote:scroll:'
+const DEFAULT_SCROLL_KEY_PREFIX = 'default:scroll:'
 const BOTTOM_EPSILON = 2
 const RESTORE_RETRY_DELAYS = [0, 32, 96, 180, 320, 520, 820, 1200]
 const SAVE_INTERVAL_MS = 120
+
+export interface ScrollRestorationOptions {
+  keyPrefix?: string
+}
 
 interface ScrollSnapshot {
   top: number
   atBottom: boolean
 }
 
-function getScrollKey(fullPath: string) {
-  return `${SCROLL_KEY_PREFIX}${fullPath}`
+function getScrollKey(fullPath: string, keyPrefix: string) {
+  return `${keyPrefix}${fullPath}`
 }
 
 function getCurrentFullPath() {
@@ -49,7 +53,7 @@ function restoreScroll(snapshot: ScrollSnapshot) {
   window.scrollTo({ left: 0, top: Number.isFinite(top) ? top : 0 })
 }
 
-function saveScrollSnapshot(fullPath: string) {
+function saveScrollSnapshot(fullPath: string, keyPrefix: string) {
   const maxScrollTop = getMaxScrollTop()
   const atBottom = maxScrollTop - window.scrollY <= BOTTOM_EPSILON
   const snapshot: ScrollSnapshot = {
@@ -57,33 +61,41 @@ function saveScrollSnapshot(fullPath: string) {
     atBottom,
   }
 
-  window.sessionStorage.setItem(getScrollKey(fullPath), JSON.stringify(snapshot))
+  window.sessionStorage.setItem(getScrollKey(fullPath, keyPrefix), JSON.stringify(snapshot))
 }
 
-export const scrollBehavior: RouterScrollBehavior = (to, _from, savedPosition) => {
-  if (savedPosition)
-    return savedPosition
+export function createScrollBehavior(options: ScrollRestorationOptions = {}): RouterScrollBehavior {
+  const keyPrefix = options.keyPrefix ?? DEFAULT_SCROLL_KEY_PREFIX
 
-  if (typeof window === 'undefined')
-    return { left: 0, top: 0 }
+  return (to, _from, savedPosition) => {
+    if (savedPosition)
+      return savedPosition
 
-  const raw = window.sessionStorage.getItem(getScrollKey(to.fullPath))
-  const snapshot = parseSnapshot(raw)
-  const top = snapshot.atBottom ? getMaxScrollTop() : snapshot.top
+    if (typeof window === 'undefined')
+      return { left: 0, top: 0 }
 
-  return {
-    left: 0,
-    top: Number.isFinite(top) ? top : 0,
+    const raw = window.sessionStorage.getItem(getScrollKey(to.fullPath, keyPrefix))
+    const snapshot = parseSnapshot(raw)
+    const top = snapshot.atBottom ? getMaxScrollTop() : snapshot.top
+
+    return {
+      left: 0,
+      top: Number.isFinite(top) ? top : 0,
+    }
   }
 }
 
-export function setupScrollRestoration(router: Router) {
+export const scrollBehavior: RouterScrollBehavior = createScrollBehavior()
+
+export function setupScrollRestoration(router: Router, options: ScrollRestorationOptions = {}) {
+  const keyPrefix = options.keyPrefix ?? DEFAULT_SCROLL_KEY_PREFIX
+
   const saveByRouter = () => {
-    saveScrollSnapshot(router.currentRoute.value.fullPath)
+    saveScrollSnapshot(router.currentRoute.value.fullPath, keyPrefix)
   }
 
   const saveByLocation = () => {
-    saveScrollSnapshot(getCurrentFullPath())
+    saveScrollSnapshot(getCurrentFullPath(), keyPrefix)
   }
 
   let scrollRafId = 0
@@ -113,7 +125,7 @@ export function setupScrollRestoration(router: Router) {
 
   router.isReady().then(() => {
     const fullPath = router.currentRoute.value.fullPath
-    const raw = window.sessionStorage.getItem(getScrollKey(fullPath))
+    const raw = window.sessionStorage.getItem(getScrollKey(fullPath, keyPrefix))
     const snapshot = parseSnapshot(raw)
 
     // Retry restoration to handle late-loading content (e.g. images/markdown assets).

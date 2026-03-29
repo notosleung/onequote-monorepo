@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite-ssg build",
+    "build": "vite-ssg build && tsx ./scripts/copy-fonts.ts",
     "preview": "vite preview --host"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-github-alerts": "^1.0.1",
     "markdown-it-link-attributes": "^4.0.1",
+    "tsx": "^4.21.0",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^31.0.0",
     "unplugin-vue-markdown": "^29.2.0",

@@ -4,7 +4,7 @@ export default function Back() {
   const currentPath = useLocation().pathname
 
   return (
-    <NavLink to={currentPath.split('/').slice(0, -1).join('/') || '/'} className="text-[1rem] text-black opacity-50 hover:text-black hover:opacity-75 dark:text-white dark:hover:text-white">
+    <NavLink to={currentPath.split('/').slice(0, -1).join('/') || '/'} className="font-mono op50 hover:op75">
       cd ..
     </NavLink>
   )

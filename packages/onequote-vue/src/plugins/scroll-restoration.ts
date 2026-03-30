@@ -1,6 +1,6 @@
 import type { Router, RouterScrollBehavior } from 'vue-router'
 
-const DEFAULT_SCROLL_KEY_PREFIX = 'default:scroll:'
+const DEFAULT_SCROLL_KEY_PREFIX = 'vue-router:scroll:'
 const BOTTOM_EPSILON = 2
 const RESTORE_RETRY_DELAYS = [0, 32, 96, 180, 320, 520, 820, 1200]
 const SAVE_INTERVAL_MS = 120

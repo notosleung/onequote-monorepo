@@ -309,6 +309,13 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: '为什么我的一眨眼这么久',
+    comeFrom: {
+      someone: '五月天 玛莎',
+      somewhere: '天空之城演唱会',
+    },
+  },
+  {
     content: '总之，住够，就好走啦\n 打开门，行出去，去远啲',
     comeFrom: {
       somewhere: '饭戏攻心',

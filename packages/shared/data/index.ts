@@ -342,6 +342,12 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: '下次是下次，\n现在是现在',
+    comeFrom: {
+      somewhere: '完美的日子',
+    },
+  },
+  {
     content:
       '人生遇到sb人很正常，如果你感觉人生一路走来很顺畅，很有可能你就是那个sb',
     comeFrom: {
@@ -605,6 +611,12 @@ export const quotes: Quote[] = [
     content: '打翻咖啡比喝下咖啡更令人提神',
     comeFrom: {
       someone: '原创',
+    },
+  },
+  {
+    content: '并不是想要就能得到，想要之后，还要主动去争取',
+    comeFrom: {
+      someone: 'Yvonne Huang',
     },
   },
 ]

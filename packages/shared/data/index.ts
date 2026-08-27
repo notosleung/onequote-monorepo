@@ -30,6 +30,13 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: 'Oh, I wish I could,\n but I don\'t want to.',
+    comeFrom: {
+      someone: 'Pheobe',
+      somewhere: 'Friends',
+    },
+  },
+  {
     content: 'We were on a break!',
     comeFrom: {
       someone: 'Ross',

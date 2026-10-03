@@ -316,6 +316,13 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: '回来吧\n 难道你不怀念吗',
+    comeFrom: {
+      someone: '五月天',
+      somewhere: '回来吧',
+    },
+  },
+  {
     content: '为什么我的一眨眼这么久',
     comeFrom: {
       someone: '五月天 玛莎',
@@ -352,6 +359,13 @@ export const quotes: Quote[] = [
     content: '下次是下次，\n现在是现在',
     comeFrom: {
       somewhere: '完美的日子',
+    },
+  },
+  {
+    content: '如果喜欢，\n就会来吧',
+    comeFrom: {
+      someone: '秋敏荷',
+      somewhere: '机智的医生生活',
     },
   },
   {

@@ -369,6 +369,12 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: '人死了有没有灵魂很重要吗？多少人活着也没有灵魂',
+    comeFrom: {
+      someone: '吴青峰',
+    },
+  },
+  {
     content:
       '人生遇到sb人很正常，如果你感觉人生一路走来很顺畅，很有可能你就是那个sb',
     comeFrom: {

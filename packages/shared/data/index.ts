@@ -330,6 +330,21 @@ export const quotes: Quote[] = [
     },
   },
   {
+    content: '我没有我没有没有\n 从运气到信心到天空宇宙全属某某',
+    comeFrom: {
+      someone: '陈奕迅',
+      somewhere: '我什么都没有',
+    },
+  },
+
+  {
+    content: '不开心就不开心\n 也别勉强的慰问\n 但求随着我的心\n 洒脱地尊重我的伤感',
+    comeFrom: {
+      someone: '陈奕迅',
+      somewhere: '开不了心',
+    },
+  },
+  {
     content: '总之，住够，就好走啦\n 打开门，行出去，去远啲',
     comeFrom: {
       somewhere: '饭戏攻心',
